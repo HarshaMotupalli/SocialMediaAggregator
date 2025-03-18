@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Scheduler</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #1e1e2e;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login {
+            color: white;
+            border: 2px solid white;
+        }
+
+        .signup {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .login:hover {
+            background: white;
+            color: #1e1e2e;
+        }
+
+        .signup:hover {
+            background: #ff3d3d;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .get-started {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero .get-started:hover {
+            background: #ff3d3d;
+        }
+
+        /* Animated Background */
+        .background-slideshow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .background-slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fadeImages 15s infinite;
+        }
+
+        .background-slideshow img:nth-child(1) { animation-delay: 0s; }
+        .background-slideshow img:nth-child(2) { animation-delay: 5s; }
+        .background-slideshow img:nth-child(3) { animation-delay: 10s; }
+
+        @keyframes fadeImages {
+            0% { opacity: 0; }
+            25% { opacity: 1; }
+            50% { opacity: 1; }
+            75% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Scrollable Content Section */
+        .content {
+            padding: 50px;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .content h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        .footer {
+            background: #29294f;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">PostPilot</div>
+        <ul class="nav-links">
+            <li><a href="#">Tools</a></li>
+            <li><a href="#">Platforms</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="#" class="login">Login</a>
+            <a href="#" class="signup">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="background-slideshow">
+            <img src="https://source.unsplash.com/1600x900/?socialmedia,technology" alt="Social Media Image 1">
+            <img src="https://source.unsplash.com/1600x900/?marketing,digital" alt="Social Media Image 2">
+            <img src="https://source.unsplash.com/1600x900/?communication,network" alt="Social Media Image 3">
+        </div>
+        <h1>Manage & Schedule Your Social Media</h1>
+        <p>Plan, schedule, and track your posts across multiple platforms from a single dashboard.</p>
+        <a href="#" class="get-started">Get Started</a>
+    </section>
+
+    <!-- Scrollable Middle Section -->
+    <section class="content">
+        <h2>Why Use a Social Media Aggregator?</h2>
+        <p>A social media aggregator helps you manage multiple platforms in one place, saving time and effort.It allows scheduling, analytics, and automation, making social media management seamless.Track engagement, reply to messages, and analyze performance—all from one dashboard.</p>
+        
+         <h2>Features</h2>
+        <p>
+            ✔️ Post Scheduling <br>
+            ✔️ Multi-Platform Support <br>
+            ✔️ Analytics & Insights <br>
+            ✔️ Team Collaboration <br>
+            ✔️ AI-Powered Post Suggestions
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Social Scheduler | <a href="#">About</a> | <a href="#">Contact</a></p>
+    </footer>
+
+</body>
+</html>
+
+       
